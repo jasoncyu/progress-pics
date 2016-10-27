@@ -23,7 +23,7 @@ setup(app, {
 const port = argv.port || process.env.PORT || 3000;
 
 app.post('/test-api', (req, res) => {
-  res.send('Hello API')
+  res.send('this is a new message')
 })
 
 // Start your app.
