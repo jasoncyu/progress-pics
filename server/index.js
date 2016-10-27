@@ -22,9 +22,9 @@ setup(app, {
 // get the intended port number, use port 3000 if not provided
 const port = argv.port || process.env.PORT || 3000;
 
-app.post('/test-api', (req, res) => {
-  res.send('this is a new message')
-})
+// Attach all the routes
+const entriesRouter = require('./entries')
+app.use('/entries', entriesRouter)
 
 // Start your app.
 app.listen(port, (err) => {
