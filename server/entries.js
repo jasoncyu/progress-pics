@@ -29,7 +29,7 @@ router.post('/all', (req, res) => {
 router.post('/', upload.single('progressPicture'), (req, res) => {
   // TODO: Validate that file is an image
   const imageFile = req.file
-  s3client.uploadProgressPicture(imageFile)
+  s3client.uploadFile(imageFile)
   .then(() => {
     res.send('Received!')
   })

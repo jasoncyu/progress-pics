@@ -25,7 +25,7 @@ const client = s3.createClient({
   },
 })
 
-const uploadProgressPicture = (imageFile) => {
+const uploadFile = (imageFile) => {
   const uploader = client.uploadFile({
     localFile: imageFile.path,
     s3Params: {
@@ -50,5 +50,5 @@ const uploadProgressPicture = (imageFile) => {
 }
 
 module.exports = {
-  uploadProgressPicture,
+  uploadFile,
 }
