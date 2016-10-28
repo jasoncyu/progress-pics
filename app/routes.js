@@ -5,7 +5,7 @@
 import { getAsyncInjectors } from './utils/asyncInjectors';
 
 const errorLoading = (err) => {
-  console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
+  console.error('Dynamic page loading failed', err);
 };
 
 const loadModule = (cb) => (componentModule) => {
@@ -53,6 +53,26 @@ export default function createRoutes(store) {
         System.import('components/TestMaterial')
           .then(loadModule(cb))
           .catch(errorLoading);
+      },
+    }, {
+      path: '/entry',
+      name: 'entry',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/Entry/reducer'),
+          System.import('containers/Entry/sagas'),
+          System.import('containers/Entry'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('entry', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
       },
     }, {
       path: '*',
