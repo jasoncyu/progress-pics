@@ -12,6 +12,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
 import $ from 'npm-zepto'
+import { Grid, Row, Col } from 'react-flexbox-grid/lib/index'
 
 // Needed for material-ui. It'll raise errors in development for multiple injections,
 // but we can ignore those.
@@ -39,6 +40,12 @@ export class Entry extends React.Component { // eslint-disable-line react/prefer
             { name: 'description', content: 'Description of Entry' },
           ]}
         />
+
+        <Grid>
+          <Row center="lg">
+            <Col xs={6} md={3}>Hello, world!</Col>
+          </Row>
+        </Grid>
 
         <RaisedButton
           className="button"
