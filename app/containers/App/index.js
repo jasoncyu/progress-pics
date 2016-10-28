@@ -10,34 +10,30 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import AppBar from 'material-ui/AppBar'
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import 'sanitize.css/sanitize.css';
-
-import Img from 'components/Img';
-import Footer from 'components/Footer';
-import Banner from './banner-metal.jpg';
-import A from 'components/A';
 
 import styles from './styles.css';
 
 function App(props) {
   return (
-    <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+    // Needed for material-ui to work.
+    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div className={styles.wrapper}>
         <Helmet
-          titleTemplate="%s - React.js Boilerplate"
-          defaultTitle="React.js Boilerplate"
+          titleTemplate="%s - Progress Pics"
+          defaultTitle="Progress Pics"
           meta={[
             { name: 'description', content: 'A React.js Boilerplate application' },
           ]}
         />
-        <A className={styles.logoWrapper} href="https://twitter.com/mxstbr">
-          <Img className={styles.logo} src={Banner} alt="react-boilerplate - Logo" />
-        </A>
+        <AppBar
+          title="Progress Pics"
+        />
         {React.Children.toArray(props.children)}
-        <Footer />
       </div>
     </MuiThemeProvider>
   );

@@ -1,12 +1,22 @@
 [
   {
-    "id": "app.components.LocaleToggle.de",
-    "defaultMessage": "de",
+    "id": "app.components.TestMaterial.header",
+    "defaultMessage": "This is the TestMaterial component !",
     "message": ""
   },
   {
-    "id": "app.components.LocaleToggle.en",
-    "defaultMessage": "en",
+    "id": "app.containers.Entry.header",
+    "defaultMessage": "This is Entry container !",
+    "message": ""
+  },
+  {
+    "id": "app.containers.Entry.takePicture",
+    "defaultMessage": "Take Picture",
+    "message": ""
+  },
+  {
+    "id": "app.containers.Entry.uploadPicture",
+    "defaultMessage": "Upload Picture",
     "message": ""
   },
   {

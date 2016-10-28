@@ -13,7 +13,8 @@ import messages from './messages';
 import styles from './styles.css';
 import $ from 'npm-zepto'
 
-// Needed for material-ui
+// Needed for material-ui. It'll raise errors in development for multiple injections,
+// but we can ignore those.
 /* import injectTapEventPlugin from 'react-tap-event-plugin';
  * injectTapEventPlugin();*/
 import RaisedButton from 'material-ui/RaisedButton'
@@ -38,11 +39,10 @@ export class Entry extends React.Component { // eslint-disable-line react/prefer
             { name: 'description', content: 'Description of Entry' },
           ]}
         />
-        <FormattedMessage {...messages.header} />
 
         <RaisedButton
           className="button"
-          label="Take Picture"
+          label={<FormattedMessage {...messages.takePicture} />}
           onClick={this.takePicture}
           primary
         >
@@ -57,7 +57,7 @@ export class Entry extends React.Component { // eslint-disable-line react/prefer
 
         <RaisedButton
           className="button"
-          label="Upload Picture"
+          label={<FormattedMessage {...messages.uploadPicture} />}
           onClick={this.uploadPicture}
           secondary
         />
