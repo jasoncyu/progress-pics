@@ -21,15 +21,12 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 export class Entry extends React.Component { // eslint-disable-line react/prefer-stateless-function
   takePicture() {
-    console.log('takePicture');
-    console.log('styles.cameraInputElem: ', styles.cameraInputElem)
     const $inputElem = $(`.${styles.cameraInputElem}`)
-    console.log('$inputElem: ', $inputElem)
     $inputElem.trigger('click')
   }
 
   uploadPicture() {
-    $(`${styles.uploadInputElem}`).trigger('click')
+    $(`.${styles.uploadInputElem}`).trigger('click')
   }
 
   render() {
