@@ -3,6 +3,7 @@ const multer = require('multer')
 const path = require('path');
 
 const s3client = require('./s3client')
+const db = require('./db')
 
 // Handle files from multipar/form-data
 // Writing files to /tmp so we can delete them later.
@@ -13,15 +14,13 @@ const router = new express.Router({
 })
 
 router.post('/all', (req, res) => {
-  res.send(JSON.stringify({
-    id: 1,
-    weight: 200,
-    pictureUrl: 'asdf.com',
-  }, {
-    id: 2,
-    weight: 197,
-    pictureUrl: 'reddit.com',
-  }))
+  db.Entry.find({}).exec(
+    (err, entries) => {
+      if (err) console.error(err)
+      res.send(JSON.stringify({
+        entries,
+      }))
+    })
 })
 
 /**
@@ -34,8 +33,13 @@ router.post('/', upload.single('progressPicture'), (req, res) => {
   const fileNameForS3 = `${imageFile.filename}${fileExtension}`
   s3client.uploadFile(imageFile, fileNameForS3)
   .then((key) => {
-    s3client.getFileUrl(key)
-    res.send('Received!')
+    const url = s3client.getFileUrl(key)
+    new db.Entry({
+      s3Url: url,
+    }).save((err, entry) => {
+      console.log(entry)
+      res.send('Received!')
+    })
   })
 })
 
