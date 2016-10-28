@@ -25,12 +25,14 @@ const client = s3.createClient({
   },
 })
 
-const uploadFile = (imageFile) => {
+const uploadFile = (imageFile, fileName) => {
+  const key = `actual-progress-pics/${fileName}`
   const uploader = client.uploadFile({
     localFile: imageFile.path,
     s3Params: {
       Bucket: config.aws.bucket,
-      Key: config.aws.accessKeyId,
+      Key: key,
+      ACL: 'public-read',
     },
   })
 
@@ -44,11 +46,18 @@ const uploadFile = (imageFile) => {
     //   console.log('progress', `${uploader.progressAmount}/${uploader.progressTotal}`);
     // })
     uploader.on('end', () => {
-      resolve()
+      resolve(key)
     })
   })
 }
 
+const getFileUrl = (key) => {
+  const url = s3.getPublicUrl(config.aws.bucket, key, config.aws.region)
+
+  return url
+}
+
 module.exports = {
   uploadFile,
+  getFileUrl,
 }

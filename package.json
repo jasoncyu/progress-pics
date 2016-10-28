@@ -155,7 +155,8 @@
       "require-yield": 0,
       "semi": 0,
       "no-useless-constructor": 0,
-      "strict": 0
+      "strict": 0,
+      "new-cap": 0
     },
     "settings": {
       "import/resolver": {

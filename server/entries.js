@@ -1,5 +1,6 @@
 const express = require('express')
 const multer = require('multer')
+const path = require('path');
 
 const s3client = require('./s3client')
 
@@ -29,8 +30,11 @@ router.post('/all', (req, res) => {
 router.post('/', upload.single('progressPicture'), (req, res) => {
   // TODO: Validate that file is an image
   const imageFile = req.file
-  s3client.uploadFile(imageFile)
-  .then(() => {
+  const fileExtension = path.parse(imageFile.originalname).ext
+  const fileNameForS3 = `${imageFile.filename}${fileExtension}`
+  s3client.uploadFile(imageFile, fileNameForS3)
+  .then((key) => {
+    s3client.getFileUrl(key)
     res.send('Received!')
   })
 })
