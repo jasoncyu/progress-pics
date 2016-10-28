@@ -1,3 +1,17 @@
 .entry { /* stylelint-disable */
 
 }
+
+.button {
+}
+
+.cameraInputElem {
+  /* Hiding this so we can trigger it with a custom button */
+  display: none;
+}
+
+
+.uploadInputElem {
+  /* Hiding this so we can trigger it with a custom button */
+  display: none;
+}

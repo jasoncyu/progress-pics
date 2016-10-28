@@ -55,8 +55,8 @@ export default function createRoutes(store) {
           .catch(errorLoading);
       },
     }, {
-      path: '/entry',
-      name: 'entry',
+      path: '/entries/new',
+      name: 'newEntry',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           System.import('containers/Entry/reducer'),
