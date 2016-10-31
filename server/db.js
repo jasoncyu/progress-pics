@@ -13,6 +13,7 @@ db.once('open', () => {
 })
 
 const entrySchema = mongoose.Schema({
+  createdTs: Date,
   s3Url: String,
 })
 
