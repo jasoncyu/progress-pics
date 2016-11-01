@@ -12,10 +12,6 @@ export default defineMessages({
   },
   takePicture: {
     id: 'app.containers.Entry.takePicture',
-    defaultMessage: 'Take Picture',
-  },
-  uploadPicture: {
-    id: 'app.containers.Entry.uploadPicture',
-    defaultMessage: 'Upload Picture',
+    defaultMessage: 'Click here or drag & drop to upload a picture here.',
   },
 });

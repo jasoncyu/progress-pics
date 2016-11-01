@@ -9,6 +9,7 @@ const webpack = require('webpack');
 const cssnext = require('postcss-cssnext');
 const postcssFocus = require('postcss-focus');
 const postcssReporter = require('postcss-reporter');
+const postcssMixins = require('postcss-mixins')
 
 module.exports = (options) => ({
   entry: options.entry,
@@ -77,6 +78,7 @@ module.exports = (options) => ({
     }),
   ]),
   postcss: () => [
+    postcssMixins(),
     postcssFocus(), // Add a :focus to every :hover
     cssnext({ // Allow future CSS features to be used, also auto-prefixes the CSS...
       browsers: ['last 2 versions', 'IE > 10'], // ...based on this browser list

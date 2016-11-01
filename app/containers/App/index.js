@@ -10,6 +10,10 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+// Needed for material-ui. It'll raise errors in development for multiple injections,
+// but we can ignore those.
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 import AppBar from 'material-ui/AppBar'
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 

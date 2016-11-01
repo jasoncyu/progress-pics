@@ -15,7 +15,7 @@ describe('createEntry Saga', () => {
   let createEntryGen
 
   beforeEach(() => {
-    createEntryGen = createEntry(file)
+    createEntryGen = createEntry(actions.createEntryAction(file))
 
     expect(createEntryGen.next().value).toEqual(
       call(createEntryCall, file))

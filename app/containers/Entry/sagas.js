@@ -15,7 +15,8 @@ export async function createEntryCall(file) {
   })
 }
 
-export function* createEntry(file) {
+export function* createEntry(createEntryAction) {
+  const file = createEntryAction.payload.file
   const entry = yield call(createEntryCall, file)
   if (!entry.err) {
     yield put({
