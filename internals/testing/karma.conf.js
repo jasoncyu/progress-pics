@@ -4,12 +4,17 @@ const path = require('path');
 
 module.exports = (config) => {
   config.set({
-    frameworks: ['mocha'],
+    frameworks: [
+      'mocha',
+      // Needed for international support in Phantomjs
+      'intl-shim',
+    ],
     reporters: ['coverage', 'mocha'],
     browsers: process.env.TRAVIS // eslint-disable-line no-nested-ternary
       ? ['ChromeTravis']
       : process.env.APPVEYOR
-        ? ['IE'] : ['Chrome'],
+    // Use phantomjs locally for faster testing.
+        ? ['IE'] : ['PhantomJS'],
 
     autoWatch: false,
     singleRun: true,
