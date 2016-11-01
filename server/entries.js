@@ -35,10 +35,10 @@ router.post('/', upload.single('progressPicture'), (req, res) => {
   .then((key) => {
     const url = s3client.getFileUrl(key)
     new db.Entry({
+      createdTs: new Date(),
       s3Url: url,
     }).save((err, entry) => {
-      console.log(entry)
-      res.send('Received!')
+      res.send(JSON.stringify(entry))
     })
   })
 })
