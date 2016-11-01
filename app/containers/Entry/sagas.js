@@ -1,6 +1,6 @@
 import { takeLatest } from 'redux-saga'
 import { fork, call, put } from 'redux-saga/effects'
-import { request } from '../../utils/request'
+import request from 'utils/request';
 
 import { CREATE_ENTRY, CREATE_ENTRY_SUCCESS, CREATE_ENTRY_ERROR } from './constants'
 
@@ -37,7 +37,7 @@ export function* createEntryWatcher() {
 // Individual exports for testing
 export function* defaultSaga() {
   // yield fork(takeLatest, CREATE_ENTRY, createEntry)
-  yield takeLatest(CREATE_ENTRY, createEntry)
+  yield fork(takeLatest, CREATE_ENTRY, createEntry)
 }
 
 // All sagas to be loaded

@@ -36,7 +36,7 @@ app.listen(port, (err) => {
   if (ngrok) {
     ngrok.connect(port, (innerErr, url) => {
       if (innerErr) {
-        return logger.error(innerErr);
+        return logger.error(JSON.stringify(innerErr, null, 2));
       }
 
       logger.appStarted(port, url);
