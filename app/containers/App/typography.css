@@ -1,0 +1,42 @@
+/* Taken from https://getmdl.io/styles/index.html */
+
+.header-base {
+  letter-spacing: -.04rem;
+  line-height: 1;
+}
+
+.header-one {
+  composes: header-base;
+  font-size: 7rem;
+  font-weight: 300;
+}
+
+.header-two {
+  composes: header-base;
+  font-size: 3.5rem;
+  font-weight: 400;
+}
+
+.header-three {
+  composes: header-base;
+  font-size: 2.8125rem;
+  font-weight: 400;
+}
+
+.header-four {
+  composes: header-base;
+  font-size: 2.125rem;
+  font-weight: 400;
+}
+
+.header-five {
+  composes: header-base;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.header-six {
+  composes: header-base;
+  font-size: 1.25rem;
+  font-weight: 500;
+}

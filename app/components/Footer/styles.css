@@ -1,6 +1,17 @@
+@value grey800 from '../../containers/App/colors.css';
+
 .footer {
+  background: grey800;
+  color: white;
+
   display: flex;
   justify-content: space-between;
-  padding: 3em 0;
-  border-top: 1px solid #666;
+  padding: 1em 0;
+
+  /* A flex-grow of 0 will force the footer to take minimal size */
+  flex: none;
+}
+
+section {
+  margin:auto;
 }

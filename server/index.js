@@ -8,7 +8,10 @@ const setup = require('./middlewares/frontendMiddleware');
 const isDev = process.env.NODE_ENV !== 'production';
 const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngrok') : false;
 const resolve = require('path').resolve;
+const bodyParser = require('body-parser');
+
 const app = express();
+app.use(bodyParser())
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
@@ -25,6 +28,8 @@ const port = argv.port || process.env.PORT || 3000;
 // Attach all the routes
 const entriesRouter = require('./entries')
 app.use('/entries', entriesRouter)
+const usersRouter = require('./users')
+app.use('/users', usersRouter)
 
 // Start your app.
 app.listen(port, (err) => {

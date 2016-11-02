@@ -1,12 +1,7 @@
 @value grey400 from '../App/colors.css';
-.entry {
-}
-
-.button {
-}
 
 .dropZoneRow {
-  width: 80%;
+  flex-basis: 80%;
   max-width: 50rem;
   margin: auto;
 }

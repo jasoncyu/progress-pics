@@ -15,6 +15,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 import AppBar from 'material-ui/AppBar'
+import Footer from 'components/Footer';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
@@ -37,7 +38,12 @@ function App(props) {
         <AppBar
           title="Progress Pics"
         />
-        {React.Children.toArray(props.children)}
+        <div
+          className={styles.contentWrapper}
+        >
+          {React.Children.toArray(props.children)}
+        </div>
+        <Footer />
       </div>
     </MuiThemeProvider>
   );
