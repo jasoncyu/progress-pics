@@ -7,13 +7,6 @@ const router = new express.Router({
   mergeParams: true,
 })
 
-router.post('/', (req, res) => {
-  db.User.create(req.body, (err, user) => {
-    if (err) res.send(err)
-    res.send(JSON.stringify(user))
-  })
-})
-
 passport.use(new LocalStrategy(
   (email, password, done) => {
     db.User.findOne({ email }, (err, user) => {
@@ -27,5 +20,23 @@ passport.use(new LocalStrategy(
       return done(null, user);
     });
   }))
+
+router.post('/login', passport.authenticate('local'), (req, res) => {
+  res.send(JSON.stringify({ status: 'Success' }))
+})
+
+router.post('/', (req, res, next) => {
+  db.User.create(req.body, (err, user) => {
+    if (err) next(err)
+    res.send(JSON.stringify(user))
+  })
+})
+
+router.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send({
+    message: 'Oops, something went wrong. Try again?',
+  })
+})
 
 module.exports = router
