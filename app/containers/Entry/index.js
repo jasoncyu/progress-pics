@@ -14,7 +14,9 @@ import styles from './styles.css';
 import { createEntryAction } from './actions'
 import { Grid, Row, Col } from 'react-flexbox-grid/lib/index'
 import Dropzone from 'react-dropzone'
+import { UserIsAuthenticated } from '../../authWrappers'
 
+@UserIsAuthenticated
 export class Entry extends React.Component { // eslint-disable-line react/prefer-stateless-function
   onChange(evt) {
     console.log('evt', evt)

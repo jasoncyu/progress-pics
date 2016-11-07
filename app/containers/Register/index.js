@@ -92,6 +92,10 @@ function mapDispatchToProps(dispatch) {
       evt.preventDefault()
       dispatch(actions.logInAction())
     },
+    register(evt) {
+      evt.preventDefault()
+      dispatch(actions.registerAction())
+    },
   };
 }
 

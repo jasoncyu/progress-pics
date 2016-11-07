@@ -4,6 +4,13 @@ const path = require('path');
 const compression = require('compression');
 const pkg = require(path.resolve(process.cwd(), 'package.json'));
 
+
+/**
+ * Middleware used in all NODE_ENV's
+ */
+const addSharedMiddlewares = (app) => {
+}
+
 // Dev middleware
 const addDevMiddlewares = (app, webpackConfig) => {
   const webpack = require('webpack');
@@ -19,6 +26,7 @@ const addDevMiddlewares = (app, webpackConfig) => {
 
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
+  addSharedMiddlewares(app)
 
   // Since webpackDevMiddleware uses memory-fs internally to store build
   // artifacts, we use it instead
@@ -51,6 +59,7 @@ const addProdMiddlewares = (app, options) => {
   // smaller (applies also to assets). You can read more about that technique
   // and other good practices on official Express.js docs http://mxs.is/googmy
   app.use(compression());
+  addSharedMiddlewares(app)
   app.use(publicPath, express.static(outputPath));
 
   app.get('*', (req, res) => res.sendFile(path.resolve(outputPath, 'index.html')));

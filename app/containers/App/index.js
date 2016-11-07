@@ -7,6 +7,7 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -16,12 +17,37 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 import AppBar from 'material-ui/AppBar'
 import Footer from 'components/Footer';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import FlatButton from 'material-ui/FlatButton';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
+import {
+  logInAction,
+  logoutAction,
+} from '../Register/actions'
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import 'sanitize.css/sanitize.css';
 
+import { VisibleOnlyIfLoggedIn, VisibleOnlyAdmin } from '../../authWrappers'
+import request from '../../utils/request'
+
 import styles from './styles.css';
+
+import sa from 'superagent'
+
+const authCheck = (evt) => {
+  evt.preventDefault()
+  request('/users/is-logged-in', {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'no-cors',
+  })
+  /* sa
+   *    .post('/users/is-logged-in')
+   *    .send()
+   * .end()*/
+  /* const req = new XMLHttpRequest()
+   * req.open('POST')*/
+}
 
 function App(props) {
   return (
@@ -38,6 +64,9 @@ function App(props) {
         <AppBar
           title="Progress Pics"
         />
+        <button onClick={authCheck}>
+          Check auth
+        </button>
         <div
           className={styles.contentWrapper}
         >
@@ -51,6 +80,26 @@ function App(props) {
 
 App.propTypes = {
   children: React.PropTypes.node,
+  logout: React.PropTypes.func,
+  login: React.PropTypes.func,
 };
 
-export default App;
+function mapStateToProps() {
+  return {}
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    logout(evt) {
+      evt.preventDefault()
+      dispatch(logoutAction())
+    },
+    login(evt) {
+      evt.preventDefault()
+      dispatch(logInAction())
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

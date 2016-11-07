@@ -9,6 +9,7 @@ import {
   DEFAULT_ACTION,
   CHANGE_USERNAME,
   CHANGE_PASSWORD,
+  LOG_IN_SUCCESS,
 } from './constants';
 
 const initialState = fromJS({
@@ -27,6 +28,12 @@ function registerReducer(state = initialState, action) {
     case CHANGE_PASSWORD: {
       return state
         .set('password', action.payload.password)
+    }
+
+    case LOG_IN_SUCCESS: {
+      console.log('action: ', action)
+      return state
+        .set('user', action.payload.user)
     }
     default:
       return state;

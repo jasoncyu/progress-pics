@@ -32,7 +32,7 @@ export default function createRoutes(store) {
         importModules.then(([reducer, sagas, component]) => {
           injectReducer('home', reducer.default);
           injectSagas(sagas.default);
-
+          console.log('component: ', component)
           renderRoute(component);
         });
 
@@ -61,7 +61,7 @@ export default function createRoutes(store) {
         importModules.then(([reducer, sagas, component]) => {
           injectReducer('entry', reducer.default);
           injectSagas(sagas.default);
-          renderRoute(component);
+          renderRoute(component, { needsAuth: true });
         });
 
         importModules.catch(errorLoading);
