@@ -7,6 +7,7 @@
  */
 
 import React from 'react';
+import request from '../../utils/request'
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -15,7 +16,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 // but we can ignore those.
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
-import AppBar from 'material-ui/AppBar'
 import FlatButton from 'material-ui/FlatButton';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
 import {
@@ -25,6 +25,7 @@ import {
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import LogInHeader from '../LogInHeader';
 import styled from 'styled-components';
 
 const AppWrapper = styled.div`
@@ -65,15 +66,8 @@ function App(props) {
             { name: 'description', content: 'A React.js Boilerplate application' },
           ]}
         />
-        <AppBar
-          title="Progress Pics"
-        />
-        <button onClick={authCheck}>
-          Check auth
-        </button>
-        <div
-          className={styles.contentWrapper}
-        >
+        <LogInHeader />
+        <div>
           {React.Children.toArray(props.children)}
         </div>
         <Footer />

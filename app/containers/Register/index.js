@@ -16,11 +16,33 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 import * as actions from './actions'
 import * as s from './selectors'
+import styled from 'styled-components';
+
+import { H3 } from '../../stuff/typography';
+
+const MyCol = styled(Col)`
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+`
+
+const RegisterForm = styled.form`
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+`
+
+const EmailInput = styled(TextField)`
+  margin: auto;
+`
+const PasswordInput = styled(TextField)`
+  margin: auto;
+`
 
 export class Register extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div className={styles.register}>
+      <div>
         <Helmet
           title="Register"
           meta={[
@@ -28,25 +50,23 @@ export class Register extends React.Component { // eslint-disable-line react/pre
           ]}
         />
 
-        <h3 className={styles.title}>
+        <H3>
           Log in
-        </h3>
+        </H3>
 
         <Grid>
           <Row center="xs">
-            <Col className={styles.extraColName} md={12}>
-              <form className={styles.registerForm} onSubmit={this.props.logIn}>
-                <TextField
+            <MyCol md={12}>
+              <RegisterForm onSubmit={this.props.logIn}>
+                <EmailInput
                   fullWidth
                   floatingLabelText="Email"
-                  className={styles.emailInput}
                   value={this.props.username}
                   onChange={this.props.onChangeUsername}
                 />
 
-                <TextField
+                <PasswordInput
                   fullWidth
-                  className={styles.passwordInput}
                   floatingLabelText="Password"
                   value={this.props.password}
                   onChange={this.props.onChangePassword}
@@ -56,8 +76,8 @@ export class Register extends React.Component { // eslint-disable-line react/pre
                   type="submit"
                   label="Log In"
                 />
-              </form>
-            </Col>
+              </RegisterForm>
+            </MyCol>
           </Row>
         </Grid>
       </div>
