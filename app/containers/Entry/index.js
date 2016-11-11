@@ -10,7 +10,7 @@ import Helmet from 'react-helmet';
 import selectEntry from './selectors';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import styles from './styles.css';
+// import styles from './styles.css';
 import { createEntryAction } from './actions'
 import { Grid, Row, Col } from 'react-flexbox-grid/lib/index'
 import Dropzone from 'react-dropzone'

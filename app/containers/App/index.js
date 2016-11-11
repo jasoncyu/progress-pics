@@ -16,7 +16,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 import AppBar from 'material-ui/AppBar'
-import Footer from 'components/Footer';
 import FlatButton from 'material-ui/FlatButton';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
 import {
@@ -24,13 +23,18 @@ import {
   logoutAction,
 } from '../Register/actions'
 
-// Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
-import 'sanitize.css/sanitize.css';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
+import styled from 'styled-components';
 
-import { VisibleOnlyIfLoggedIn, VisibleOnlyAdmin } from '../../authWrappers'
-import request from '../../utils/request'
-
-import styles from './styles.css';
+const AppWrapper = styled.div`
+  max-width: calc(768px + 16px * 2);
+  margin: 0 auto;
+  display: flex;
+  min-height: 100%;
+  padding: 0 16px;
+  flex-direction: column;
+`;
 
 import sa from 'superagent'
 
@@ -53,7 +57,7 @@ function App(props) {
   return (
     // Needed for material-ui to work.
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-      <div className={styles.wrapper}>
+      <AppWrapper>
         <Helmet
           titleTemplate="%s - Progress Pics"
           defaultTitle="Progress Pics"
@@ -73,7 +77,7 @@ function App(props) {
           {React.Children.toArray(props.children)}
         </div>
         <Footer />
-      </div>
+      </AppWrapper>
     </MuiThemeProvider>
   );
 }

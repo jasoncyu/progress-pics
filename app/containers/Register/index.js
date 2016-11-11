@@ -8,7 +8,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
-import styles from './styles.css';
+// import styles from './styles.css';
 
 import { Grid, Row, Col } from 'react-flexbox-grid/lib/index'
 import TextField from 'material-ui/TextField'
