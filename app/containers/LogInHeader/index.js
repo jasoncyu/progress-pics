@@ -34,7 +34,7 @@ export class LogInHeader extends React.PureComponent { // eslint-disable-line re
 
   render() {
     const iconElementRight = (() => {
-      if (this.props.user.id) {
+      if (this.props.user._id) {
         return (
           <FlatButton label="Log Out" onClick={this.props.logout} />
         )

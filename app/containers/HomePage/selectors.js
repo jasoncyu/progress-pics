@@ -8,7 +8,10 @@ const selectHome = () => (state) => state.get('home');
 
 const selectUsername = () => createSelector(
   selectHome(),
-  (homeState) => homeState.get('username')
+  (homeState) => {
+    console.log('homeState: ', homeState)
+    return homeState.get('username')
+  }
 );
 
 export {

@@ -25,8 +25,7 @@ export function* login() {
     }))
 
   if (!loginData.err) {
-    console.log('login done, new cookie: ', document.cookie);
-    yield put(a.logInSuccessAction(loginData.data))
+    yield put(a.logInSuccessAction({ user: loginData.user }))
   } else {
     yield put(a.logInErrorAction(loginData.err))
   }

@@ -15,6 +15,7 @@ import {
 const initialState = fromJS({
   username: '',
   password: '',
+  user: {},
 });
 
 function registerReducer(state = initialState, action) {
