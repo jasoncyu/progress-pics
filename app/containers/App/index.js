@@ -35,21 +35,6 @@ const AppWrapper = styled.div`
 
 import sa from 'superagent'
 
-const authCheck = (evt) => {
-  evt.preventDefault()
-  request('/users/is-logged-in', {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'no-cors',
-  })
-  /* sa
-   *    .post('/users/is-logged-in')
-   *    .send()
-   * .end()*/
-  /* const req = new XMLHttpRequest()
-   * req.open('POST')*/
-}
-
 function App(props) {
   return (
     // Needed for material-ui to work.

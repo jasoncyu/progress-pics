@@ -27,12 +27,9 @@ passport.use(new LocalStrategy(
     });
   }))
 passport.serializeUser((user, done) => {
-  console.log('serializeUser');
-  console.log('user: ', user)
   done(null, user._id)
 })
 passport.deserializeUser((id, done) => {
-  console.log('deserializeUser')
   db.User.findById(id, (err, user) => {
     console.log('user: ', user)
     done(err, user)
@@ -40,7 +37,6 @@ passport.deserializeUser((id, done) => {
 })
 
 const ensureAuthenticated = (req, res, next) => {
-  console.log('req.user: ', req.user)
   if (req.isAuthenticated()) {
     next()
   } else {
@@ -52,8 +48,6 @@ const ensureAuthenticated = (req, res, next) => {
 }
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
-  console.log('req.user: ', req.user)
-  console.log('req.session: ', req.session)
   res.send(JSON.stringify({ user: req.user }))
 })
 
@@ -63,15 +57,14 @@ router.post('/logout', (req, res) => {
   res.send(JSON.stringify({ message: 'Success' }))
 })
 
-router.post('/is-logged-in', ensureAuthenticated, (req, res) => {
-  console.log('req.cookie: ', req.cookie)
+router.post('/get-current-user', ensureAuthenticated, (req, res) => {
   if (req.user) {
     res.send(JSON.stringify({
-      isLoggedIn: true,
+      user: req.user,
     }))
   } else {
     res.send(JSON.stringify({
-      isLoggedIn: false,
+      user: {},
     }))
   }
 })

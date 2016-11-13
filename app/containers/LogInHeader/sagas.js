@@ -4,17 +4,23 @@ import { takeLatest } from 'redux-saga';
 import request from 'utils/request';
 
 export function* checkAuth() {
-  try {
-    yield call(request, '/users/is-logged-in', {
-      method: 'POST',
-      credentials: 'include',
-      mode: 'no-cors',
+  const res = yield call(request, '/users/get-current-user', {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'no-cors',
+  })
+
+  if (!res.err) {
+    yield put({
+      type: 'CHECK_AUTH_SUCCESS',
+      payload: {
+        user: res.user,
+      },
     })
-  } catch (err) {
-    const finalErr = yield err.response.json()
+  } else {
     yield put({
       type: 'CHECK_AUTH_ERROR',
-      err: finalErr,
+      err: res.err,
     })
   }
 }

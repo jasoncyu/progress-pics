@@ -25,6 +25,7 @@ const initialState = fromJS({
   userData: {
     repositories: false,
   },
+  user: {},
 });
 
 function appReducer(state = initialState, action) {
@@ -43,6 +44,11 @@ function appReducer(state = initialState, action) {
       return state
         .set('error', action.error)
         .set('loading', false);
+    case 'CHECK_AUTH_ERROR':
+      return state.set('errorMessage', action.err.message)
+    case 'CHECK_AUTH_SUCCESS':
+      console.log('action: ', action)
+      return state.set('user', action.payload.user)
     default:
       return state;
   }

@@ -42,6 +42,14 @@ const selectLocationState = () => {
   };
 };
 
+export const selectUser = () => createSelector(
+  selectGlobal(),
+  (substate) => {
+    return substate ? substate.get('user') : {}
+  }
+)
+
+
 export {
   selectGlobal,
   selectCurrentUser,

@@ -20,7 +20,7 @@ import {
 
 
 import { createStructuredSelector } from 'reselect';
-import { selectUser } from '../Register/selectors'
+import { selectUser } from '../App/selectors'
 
 /**
  * Checks the user's auth status and shows the appropriate content.

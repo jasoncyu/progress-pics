@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 /**
  * Direct selector to the logInHeader state domain
  */
-const selectLogInHeaderDomain = () => (state) => state.get('logInHeader');
+const selectLogInHeaderDomain = () => (state) => state.get('global');
 
 /**
  * Other specific selectors

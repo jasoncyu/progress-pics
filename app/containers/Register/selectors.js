@@ -29,13 +29,6 @@ export const selectPassword = () => createSelector(
   (substate) => substate.password
 )
 
-export const selectUser = () => createSelector(
-  selectRegisterDomain(),
-  (substate) => {
-    return substate ? substate.get('user') : {}
-  }
-)
-
 export default selectRegister;
 export {
   selectRegisterDomain,
