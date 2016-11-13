@@ -108,14 +108,14 @@ function mapDispatchToProps(dispatch) {
     onChangePassword(evt) {
       dispatch(actions.changePasswordAction(evt.target.value))
     },
-    logIn(evt) {
-      evt.preventDefault()
-      dispatch(actions.logInAction())
-    },
-    register(evt) {
-      evt.preventDefault()
-      dispatch(actions.registerAction())
-    },
+    /* logIn(evt) {
+     *   evt.preventDefault()
+     *   dispatch(actions.logInAction())
+     * },
+     * register(evt) {
+     *   evt.preventDefault()
+     *   dispatch(actions.registerAction())
+     * },*/
   };
 }
 

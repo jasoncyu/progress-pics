@@ -52,7 +52,7 @@ export const logInAction = () => {
 export const logInSuccessAction = (data) => {
   return {
     type: LOG_IN_SUCCESS,
-    payload: data
+    payload: data,
   }
 }
 

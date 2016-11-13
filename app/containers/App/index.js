@@ -18,10 +18,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 import FlatButton from 'material-ui/FlatButton';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
-import {
-  logInAction,
-  logoutAction,
-} from '../Register/actions'
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -78,8 +74,6 @@ function App(props) {
 
 App.propTypes = {
   children: React.PropTypes.node,
-  logout: React.PropTypes.func,
-  login: React.PropTypes.func,
 };
 
 function mapStateToProps() {
@@ -89,14 +83,6 @@ function mapStateToProps() {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    logout(evt) {
-      evt.preventDefault()
-      dispatch(logoutAction())
-    },
-    login(evt) {
-      evt.preventDefault()
-      dispatch(logInAction())
-    },
   }
 }
 

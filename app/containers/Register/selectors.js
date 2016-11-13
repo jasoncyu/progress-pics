@@ -29,6 +29,11 @@ export const selectPassword = () => createSelector(
   (substate) => substate.password
 )
 
+export const selectUser = () => createSelector(
+  selectRegisterDomain(),
+  (substate) => substate ? substate.get('user').toJS() : {}
+)
+
 export default selectRegister;
 export {
   selectRegisterDomain,

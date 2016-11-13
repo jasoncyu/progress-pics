@@ -44,11 +44,14 @@ const ensureAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     next()
   } else {
-    throw new Error('Not Authenticated')
+    res.setHeader('Content-Type', 'application/json')
+    res.status(400).send(JSON.stringify({
+      message: 'Please log in to do that.',
+    }))
   }
 }
 
-router.post('/login', passport.authenticate('local', {session: true}), (req, res) => {
+router.post('/login', passport.authenticate('local'), (req, res) => {
   console.log('req.user: ', req.user)
   console.log('req.session: ', req.session)
   res.send(JSON.stringify({ user: req.user }))
