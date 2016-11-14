@@ -12,7 +12,7 @@ import messages from './messages';
 import AppBar from 'material-ui/AppBar'
 import FlatButton from 'material-ui/FlatButton'
 
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
 import {
   logoutAction,
@@ -21,6 +21,14 @@ import {
 
 import { createStructuredSelector } from 'reselect';
 import { selectUser } from '../App/selectors'
+import styled from 'styled-components'
+
+const MyLink = styled(Link)`
+  color: white;
+  text-decoration: none;,
+  :hover, :focus {
+  }
+`
 
 /**
  * Checks the user's auth status and shows the appropriate content.
@@ -33,6 +41,7 @@ export class LogInHeader extends React.PureComponent { // eslint-disable-line re
   }
 
   render() {
+    const titleElem = <MyLink to="/">Progress Pics</MyLink>
     const iconElementRight = (() => {
       if (this.props.user._id) {
         return (
@@ -53,7 +62,7 @@ export class LogInHeader extends React.PureComponent { // eslint-disable-line re
           ]}
         />
         <AppBar
-          title="Progress Pics"
+          title={titleElem}
           iconElementRight={iconElementRight}
         />
       </div>
@@ -79,7 +88,7 @@ function mapDispatchToProps(dispatch) {
       browserHistory.push('/login')
     },
     logout() {
-      this.dispatch(logoutAction())
+      dispatch(logoutAction())
     },
   };
 }

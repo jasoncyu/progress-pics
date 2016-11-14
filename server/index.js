@@ -22,9 +22,12 @@ const mongoose = require('mongoose');
 // app.use('/api', myApi);
 app.use(session({
   secret: 'asdfasdf',
-  /* cookie: {
-   *   domain: '.progress-pics.com',
-   * },*/
+  resave: false,
+  // When this option is false, I get tons of session objects in my store.
+  saveUninitialized: false,
+  cookie: {
+    domain: '.progress-pics.com',
+  },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
   }),

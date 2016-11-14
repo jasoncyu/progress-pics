@@ -15,6 +15,12 @@ import {
   LOAD_REPOS,
   LOAD_REPOS_ERROR,
 } from './constants';
+
+import {
+  LOG_IN_SUCCESS,
+  LOGOUT_SUCCESS,
+} from '../Register/constants'
+
 import { fromJS } from 'immutable';
 
 // The initial state of the App
@@ -48,6 +54,16 @@ function appReducer(state = initialState, action) {
       return state.set('errorMessage', action.err.message)
     case 'CHECK_AUTH_SUCCESS':
       return state.set('user', action.payload.user)
+    case LOG_IN_SUCCESS: {
+      return state
+        .set('user', action.payload.user)
+    }
+    case LOGOUT_SUCCESS: {
+      console.log('logout_success handler');
+      return state
+        .set('user', {})
+    }
+
     default:
       return state;
   }

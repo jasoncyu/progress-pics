@@ -31,7 +31,6 @@ passport.serializeUser((user, done) => {
 })
 passport.deserializeUser((id, done) => {
   db.User.findById(id, (err, user) => {
-    console.log('user: ', user)
     done(err, user)
   })
 })
@@ -53,8 +52,11 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
 
 
 router.post('/logout', (req, res) => {
-  req.logout()
-  res.send(JSON.stringify({ message: 'Success' }))
+  // Passport docs say to use req.logout(), but that doesn't work, so I'm just
+  // removing the session entry entirely.
+  req.session.destroy((err) => {
+    res.send(JSON.stringify({ message: 'Success' }))
+  });
 })
 
 router.post('/get-current-user', ensureAuthenticated, (req, res) => {
@@ -70,7 +72,6 @@ router.post('/get-current-user', ensureAuthenticated, (req, res) => {
 })
 
 router.post('/', (req, res, next) => {
-  console.log('req.body: ', req.body)
   db.User.create(req.body, (err, user) => {
     if (err) next(err)
     res.send(JSON.stringify(user))
