@@ -47,7 +47,6 @@ function appReducer(state = initialState, action) {
     case 'CHECK_AUTH_ERROR':
       return state.set('errorMessage', action.err.message)
     case 'CHECK_AUTH_SUCCESS':
-      console.log('action: ', action)
       return state.set('user', action.payload.user)
     default:
       return state;

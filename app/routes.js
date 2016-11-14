@@ -3,6 +3,7 @@
 // See http://blog.mxstbr.com/2016/01/react-apps-with-pages for more information
 // about the code splitting business
 import { getAsyncInjectors } from './utils/asyncInjectors';
+import loginHeaderSagas from 'containers/LogInHeader/sagas';
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err);
@@ -16,6 +17,8 @@ export default function createRoutes(store) {
   // create reusable async injectors using getAsyncInjectors factory
   const { injectReducer, injectSagas } = getAsyncInjectors(store);
 
+  injectSagas(loginHeaderSagas);
+
   return [
     {
       path: '/',
@@ -23,7 +26,6 @@ export default function createRoutes(store) {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           System.import('containers/LogInHeader/reducer'),
-          System.import('containers/LogInHeader/sagas'),
           System.import('containers/LogInHeader'),
           System.import('containers/HomePage/reducer'),
           System.import('containers/HomePage/sagas'),
@@ -34,14 +36,12 @@ export default function createRoutes(store) {
 
         importModules.then(([
           logInReducer,
-          logInSagas,
           logInComponent,
           reducer,
           sagas,
           component,
         ]) => {
           injectReducer('logInHeader', logInReducer.default);
-          injectSagas(logInSagas.default);
           injectReducer('home', reducer.default);
           injectSagas(sagas.default);
 
