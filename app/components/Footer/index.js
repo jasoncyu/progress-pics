@@ -4,17 +4,26 @@ import A from 'components/A';
 import LocaleToggle from 'containers/LocaleToggle';
 import Wrapper from './Wrapper';
 import messages from './messages';
-/* import styles from './styles.css';*/
 import { FormattedMessage } from 'react-intl';
 
-function Footer() {
-  return (
-    <Wrapper>
-      <section>
-        Made with ❤️  by @jasoncyu.
-      </section>
-    </Wrapper>
-  );
+import styled from 'styled-components'
+
+
+const Section = styled.section`
+  margin: auto;
+`
+
+
+class Footer extends React.Component {
+  render() {
+    return (
+      <Wrapper>
+        <Section>
+          Made with @jasoncyu.
+        </Section>
+      </Wrapper>
+    );
+  }
 }
 
 export default Footer;

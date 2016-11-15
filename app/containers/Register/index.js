@@ -39,6 +39,10 @@ const PasswordInput = styled(TextField)`
   margin: auto;
 `
 
+const CenteredH3 = styled(H3)`
+  text-align: center;
+`
+
 export class Register extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
@@ -50,9 +54,9 @@ export class Register extends React.Component { // eslint-disable-line react/pre
           ]}
         />
 
-        <H3>
+        <CenteredH3>
           Log in
-        </H3>
+        </CenteredH3>
 
         <Grid>
           <Row center="xs">
