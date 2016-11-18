@@ -11,7 +11,17 @@ import selectEntryListCont from './selectors';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
+import { List, ListItem } from 'material-ui/List';
+
+import {
+  fetchEntriesAction,
+} from '../Entry/actions'
+
 export class EntryListCont extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  componentDidMount() {
+    this.props.fetchEntries()
+  }
+
   render() {
     return (
       <div>
@@ -21,10 +31,14 @@ export class EntryListCont extends React.PureComponent { // eslint-disable-line 
             { name: 'description', content: 'Description of EntryListCont' },
           ]}
         />
-        <FormattedMessage {...messages.header} />
+        <List>
+        </List>
       </div>
     );
   }
+}
+EntryListCont.propTypes = {
+  fetchEntries: React.PropTypes.func,
 }
 
 const mapStateToProps = selectEntryListCont();
@@ -32,6 +46,9 @@ const mapStateToProps = selectEntryListCont();
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    fetchEntries: () => {
+      dispatch(fetchEntriesAction())
+    },
   };
 }
 
