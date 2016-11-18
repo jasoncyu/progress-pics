@@ -19,19 +19,18 @@ import { UserIsAuthenticated } from '../../authWrappers'
 import styled from 'styled-components'
 
 const DropzoneRow = styled(Row)`
-  flex-basis: 80%;
-  max-width: 50rem;
   margin: auto;
 `
 
 const MyDropzone = styled(Dropzone)`
   font-size: 2rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
   padding: 1rem;
   width: 100%;
   height: 100%;
   text-align: center;
-  border: 0.4rem dashed grey400;
+  border: 0.4rem dashed grey;
 `
 
 @UserIsAuthenticated
@@ -47,7 +46,7 @@ export class Entry extends React.Component { // eslint-disable-line react/prefer
 
   render() {
     return (
-      <div>
+      <div className="top">
         <Helmet
           title="New Entry"
           meta={[
@@ -56,8 +55,8 @@ export class Entry extends React.Component { // eslint-disable-line react/prefer
         />
 
         <Grid>
-          <DropzoneRow>
-            <Col md={10} lg={10}>
+          <DropzoneRow center="lg">
+            <Col lg={12}>
               <form>
                 <MyDropzone
                   onDrop={this.props.handleDrop}
