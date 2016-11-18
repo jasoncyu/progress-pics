@@ -16,6 +16,24 @@ import { Grid, Row, Col } from 'react-flexbox-grid/lib/index'
 import Dropzone from 'react-dropzone'
 import { UserIsAuthenticated } from '../../authWrappers'
 
+import styled from 'styled-components'
+
+const DropzoneRow = styled(Row)`
+  flex-basis: 80%;
+  max-width: 50rem;
+  margin: auto;
+`
+
+const MyDropzone = styled(Dropzone)`
+  font-size: 2rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  border: 0.4rem dashed grey400;
+`
+
 @UserIsAuthenticated
 export class Entry extends React.Component { // eslint-disable-line react/prefer-stateless-function
   onChange(evt) {
@@ -29,7 +47,7 @@ export class Entry extends React.Component { // eslint-disable-line react/prefer
 
   render() {
     return (
-      <div className={styles.entry}>
+      <div>
         <Helmet
           title="New Entry"
           meta={[
@@ -38,20 +56,19 @@ export class Entry extends React.Component { // eslint-disable-line react/prefer
         />
 
         <Grid>
-          <Row className={styles.dropZoneRow}>
+          <DropzoneRow>
             <Col md={10} lg={10}>
               <form>
-                <Dropzone
-                  className={styles.dropZone}
+                <MyDropzone
                   onDrop={this.props.handleDrop}
                 >
                   <FormattedMessage
                     {...messages.takePicture}
                   />
-                </Dropzone>
+                </MyDropzone>
               </form>
             </Col>
-          </Row>
+          </DropzoneRow>
         </Grid>
       </div>
     )

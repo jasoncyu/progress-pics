@@ -26,7 +26,8 @@ app.use(session({
   // When this option is false, I get tons of session objects in my store.
   saveUninitialized: false,
   cookie: {
-    domain: '.progress-pics.com',
+    // Need to comment this out for now for auth to work locally.
+    // domain: '.progress-pics.com',
   },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
