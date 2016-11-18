@@ -19,6 +19,14 @@ const selectEntry = () => createSelector(
   (substate) => substate.toJS()
 );
 
+export const selectEntries = () => createSelector(
+  selectEntryDomain(),
+  (substate) => {
+    const entries = substate.get('entries').toJS()
+    return entries
+  }
+)
+
 export default selectEntry;
 export {
   selectEntryDomain,

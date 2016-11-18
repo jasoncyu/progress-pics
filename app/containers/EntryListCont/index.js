@@ -8,6 +8,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import selectEntryListCont from './selectors';
+import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
@@ -17,12 +18,17 @@ import {
   fetchEntriesAction,
 } from '../Entry/actions'
 
+import {
+  selectEntries,
+} from '../Entry/selectors'
+
 export class EntryListCont extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     this.props.fetchEntries()
   }
 
   render() {
+    console.log('this.props.entries: ', this.props.entries)
     return (
       <div>
         <Helmet
@@ -32,16 +38,29 @@ export class EntryListCont extends React.PureComponent { // eslint-disable-line 
           ]}
         />
         <List>
+          {
+            this.props.entries.map((entry) => {
+              return (
+                <ListItem
+                  key={entry.createdTs}
+                  primaryText={entry.s3Url}
+                />
+              )
+            })
+          }
         </List>
       </div>
     );
   }
 }
 EntryListCont.propTypes = {
+  entries: React.PropTypes.array,
   fetchEntries: React.PropTypes.func,
 }
 
-const mapStateToProps = selectEntryListCont();
+const mapStateToProps = createStructuredSelector({
+  entries: selectEntries(),
+})
 
 function mapDispatchToProps(dispatch) {
   return {

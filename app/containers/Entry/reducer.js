@@ -22,7 +22,7 @@ function entryReducer(state = initialState, action) {
       return state;
     case FETCH_ENTRIES_SUCCESS: {
       console.log('action: ', action)
-      return state.set('entries', action.payload.entries)
+      return state.set('entries', fromJS(action.payload.entries))
     }
     case FETCH_ENTRIES_ERROR: {
       return state.set('error', action.err)
