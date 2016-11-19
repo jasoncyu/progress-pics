@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 const config = require('./config')
 
-// Use native ES6 Promises over Mongoose's outdated `mpromise`.
-mongoose.Promise = Promise
+// Use bluebird promises over Mongoose's outdated `mpromise`.
+mongoose.Promise = require('bluebird')
 mongoose.connect(config.mongoConnStr)
 
 const db = mongoose.connection
@@ -13,8 +13,18 @@ db.once('open', () => {
 })
 
 const entrySchema = mongoose.Schema({
-  createdTs: Date,
-  s3Url: String,
+  createdTs: {
+    type: Date,
+    required: true,
+  },
+  s3Url: {
+    type: String,
+    required: true,
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
 })
 
 const bcrypt = require('bcrypt');
@@ -54,12 +64,22 @@ userSchema.pre('save', function userSavePre(next) {
   })
 })
 
+/**
+ * Check whether the password is correct for this user.
+ */
 userSchema.methods.isValidPassword = function isValidPassword(candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     if (err) return cb(err);
     cb(null, isMatch);
   });
 };
+
+/**
+ * Get the entries belonging to this user.
+ */
+userSchema.methods.getEntries = function getEntries() {
+  return this.model('Entry').find({ userId: this._id })
+}
 
 
 exports.Entry = mongoose.model('Entry', entrySchema)

@@ -3,6 +3,8 @@ const express = require('express')
 const LocalStrategy = require('passport-local').Strategy
 const db = require('./db')
 
+const ensureAuthenticated = require('./common').ensureAuthenticated
+
 const router = new express.Router({
   mergeParams: true,
 })
@@ -35,17 +37,6 @@ passport.deserializeUser((id, done) => {
   })
 })
 
-const ensureAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    next()
-  } else {
-    res.setHeader('Content-Type', 'application/json')
-    res.status(400).send(JSON.stringify({
-      message: 'Please log in to do that.',
-    }))
-  }
-}
-
 router.post('/login', passport.authenticate('local'), (req, res) => {
   res.send(JSON.stringify({ user: req.user }))
 })
@@ -76,22 +67,6 @@ router.post('/', (req, res, next) => {
     if (err) next(err)
     res.send(JSON.stringify(user))
   })
-})
-
-router.use((err, req, res, next) => {
-  /* res.status(500).send({
-   *   message: 'Oops, something went wrong. Try again?',
-   * })*/
-
-  console.error(err)
-  console.error(err.stack)
-  res
-    .status(500)
-    .send({
-      message: err.message,
-      err,
-    })
-  /* res.status(500).send(JSON.stringify(err, null, 2))*/
 })
 
 module.exports = router

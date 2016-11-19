@@ -55,6 +55,25 @@ app.use('/entries', entriesRouter)
 const usersRouter = require('./users')
 app.use('/users', usersRouter)
 
+
+app.use((err, req, res, next) => {
+  /* res.status(500).send({
+   *   message: 'Oops, something went wrong. Try again?',
+   * })*/
+  console.log('err middleware called');
+
+  console.error(err)
+  console.error(err.stack)
+  res
+    .status(500)
+    .send({
+      message: err.message,
+      err: JSON.stringify(err),
+    })
+  /* res.status(500).send(JSON.stringify(err, null, 2))*/
+})
+
+
 // Start your app.
 app.listen(port, (err) => {
   if (err) {

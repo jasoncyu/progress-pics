@@ -45,6 +45,7 @@ export function* createEntry(createEntryAction) {
 export function* fetchEntries() {
   const res = yield call(request, '/entries/all', {
     method: 'POST',
+    credentials: 'include',
   })
 
   if (!res.err) {
