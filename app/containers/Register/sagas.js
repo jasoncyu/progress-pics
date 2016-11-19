@@ -21,7 +21,6 @@ export function* login() {
         username,
         password,
       }),
-      credentials: 'include',
     }))
 
   if (!loginData.err) {

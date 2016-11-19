@@ -15,8 +15,6 @@ import {
 export function* checkAuth() {
   const res = yield call(request, '/users/get-current-user', {
     method: 'POST',
-    credentials: 'include',
-    mode: 'no-cors',
   })
 
   if (!res.err) {

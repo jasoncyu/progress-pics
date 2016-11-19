@@ -37,6 +37,9 @@ function checkStatus(response) {
  * @return {object}           The response data
  */
 export default function request(url, options) {
+  Object.assign(options, {
+    credentials: 'include',
+  })
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON);

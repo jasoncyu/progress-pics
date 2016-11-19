@@ -35,7 +35,7 @@ router.post('/all', ensureAuthenticated, (req, res, next) => {
 /**
  * Create an entry
  */
-router.post('/', upload.single('progressPicture'), (req, res) => {
+router.post('/', upload.single('progressPicture'), ensureAuthenticated, (req, res) => {
   // TODO: Validate that file is an image
   const imageFile = req.file
   const fileExtension = path.parse(imageFile.originalname).ext
@@ -46,6 +46,7 @@ router.post('/', upload.single('progressPicture'), (req, res) => {
     new db.Entry({
       createdTs: new Date(),
       s3Url: url,
+      userId: req.user._id,
     }).save((err, entry) => {
       res.send(JSON.stringify(entry))
     })
