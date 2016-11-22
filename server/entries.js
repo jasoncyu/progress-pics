@@ -15,6 +15,18 @@ const router = new express.Router({
   mergeParams: true,
 })
 
+
+router.get('/:entryId.json', (req, res, next) => {
+  db.Entry.findOne({ _id: req.params.entryId })
+    .then((entry) => {
+      res.send(JSON.stringify({
+        entry,
+      }))
+      return entry
+    })
+    .catch(next)
+})
+
 router.post('/all', ensureAuthenticated, (req, res, next) => {
   db.User.findOne({ _id: req.user._id })
     .then((user) => {

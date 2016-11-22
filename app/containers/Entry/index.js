@@ -33,6 +33,9 @@ const MyDropzone = styled(Dropzone)`
   border: 0.4rem dashed grey;
 `
 
+/**
+ * Component to create an entry.
+ */
 @UserIsAuthenticated
 export class Entry extends React.Component { // eslint-disable-line react/prefer-stateless-function
   onChange(evt) {

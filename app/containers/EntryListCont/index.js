@@ -11,6 +11,7 @@ import selectEntryListCont from './selectors';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import { Link } from 'react-router'
 
 import { List, ListItem } from 'material-ui/List';
 
@@ -43,7 +44,7 @@ export class EntryListCont extends React.PureComponent { // eslint-disable-line 
               return (
                 <ListItem
                   key={entry.createdTs}
-                  primaryText={entry.s3Url}
+                  primaryText={<Link to={`/entries/${entry._id}`}>{entry.s3Url}</Link>}
                 />
               )
             })

@@ -40,6 +40,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 console.log('shared middleware added');
 
+// Attach all the routes
+const entriesRouter = require('./entries')
+app.use('/entries', entriesRouter)
+const usersRouter = require('./users')
+app.use('/users', usersRouter)
+
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
@@ -48,13 +54,6 @@ setup(app, {
 
 // get the intended port number, use port 3000 if not provided
 const port = argv.port || process.env.PORT || 3000;
-
-// Attach all the routes
-const entriesRouter = require('./entries')
-app.use('/entries', entriesRouter)
-const usersRouter = require('./users')
-app.use('/users', usersRouter)
-
 
 app.use((err, req, res, next) => {
   /* res.status(500).send({

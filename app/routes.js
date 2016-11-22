@@ -149,6 +149,26 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/entries/:entryId',
+      name: 'viewEntryCont',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/ViewEntryCont/reducer'),
+          System.import('containers/ViewEntryCont/sagas'),
+          System.import('containers/ViewEntryCont'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('viewEntryCont', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
