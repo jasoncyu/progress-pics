@@ -33,7 +33,6 @@ export function* checkAuth() {
 }
 
 export function* logout() {
-  console.log('logout handler');
   const logoutData = (
     yield call(request, '/users/logout', {
       method: 'POST',

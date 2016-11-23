@@ -48,6 +48,16 @@ const CenteredH3 = styled(H3)`
  */
 export class Register extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
+    const login = (evt) => {
+      evt.preventDefault()
+
+      if (this.props.params.redirect) {
+        this.props.logIn({ redirectPath: this.props.params.redirect })
+      } else {
+        this.props.logIn()
+      }
+    }
+
     return (
       <div>
         <Helmet
@@ -64,7 +74,7 @@ export class Register extends React.Component { // eslint-disable-line react/pre
         <Grid>
           <Row center="xs">
             <MyCol md={12}>
-              <RegisterForm onSubmit={this.props.logIn}>
+              <RegisterForm onSubmit={login}>
                 <EmailInput
                   fullWidth
                   floatingLabelText="Email"
@@ -100,6 +110,7 @@ Register.propTypes = {
   onChangeUsername: React.PropTypes.func,
   onChangePassword: React.PropTypes.func,
   logIn: React.PropTypes.func,
+  params: React.PropTypes.obj,
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -116,9 +127,8 @@ function mapDispatchToProps(dispatch) {
     onChangePassword(evt) {
       dispatch(actions.changePasswordAction(evt.target.value))
     },
-    logIn(evt) {
-      evt.preventDefault()
-      dispatch(actions.logInAction())
+    logIn(params) {
+      dispatch(actions.logInAction(params))
     },
     register(evt) {
       evt.preventDefault()

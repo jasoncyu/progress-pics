@@ -1,4 +1,5 @@
 import request from '../../utils/request'
+import { browserHistory } from 'react-router';
 
 import { takeLatest } from 'redux-saga'
 import { call, put, fork, select } from 'redux-saga/effects'
@@ -7,7 +8,7 @@ import * as s from './selectors'
 import * as a from './actions'
 import * as C from './constants'
 
-export function* login() {
+export function* login(action) {
   const username = yield select(s.selectUsername())
   const password = yield select(s.selectPassword())
 
@@ -24,7 +25,11 @@ export function* login() {
     }))
 
   if (!loginData.err) {
-    yield put(a.logInSuccessAction({ user: loginData.user }))
+    yield put(a.logInSuccessAction({
+      user: loginData.user,
+      redirectPath: action.payload.redirectPath,
+    }))
+    browserHistory.push(action.payload.redirectPath)
   } else {
     yield put(a.logInErrorAction(loginData.err))
   }

@@ -1,4 +1,5 @@
 'use strict'
+
 // Need use strict to enable classes
 const s3 = require('s3')
 

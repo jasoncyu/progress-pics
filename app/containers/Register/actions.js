@@ -43,16 +43,22 @@ export const changePasswordAction = (password) => {
   }
 }
 
-export const logInAction = () => {
+export const logInAction = ({ redirectPath = '/' } = {}) => {
   return {
     type: LOG_IN,
+    payload: {
+      redirectPath,
+    },
   }
 }
 
-export const logInSuccessAction = (data) => {
+export const logInSuccessAction = ({ user, redirectPath }) => {
   return {
     type: LOG_IN_SUCCESS,
-    payload: data,
+    payload: {
+      user,
+      redirectPath,
+    },
   }
 }
 

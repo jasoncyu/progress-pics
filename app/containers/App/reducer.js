@@ -9,7 +9,6 @@
  * case YOUR_ACTION_CONSTANT:
  *   return state.set('yourStateVariable', true);
  */
-
 import {
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS,
@@ -59,7 +58,6 @@ function appReducer(state = initialState, action) {
         .set('user', action.payload.user)
     }
     case LOGOUT_SUCCESS: {
-      console.log('logout_success handler');
       return state
         .set('user', {})
     }

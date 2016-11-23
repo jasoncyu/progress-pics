@@ -21,7 +21,6 @@ function entryReducer(state = initialState, action) {
     case DEFAULT_ACTION:
       return state;
     case FETCH_ENTRIES_SUCCESS: {
-      console.log('action: ', action)
       return state.set('entries', fromJS(action.payload.entries))
     }
     case FETCH_ENTRIES_ERROR: {
