@@ -43,6 +43,9 @@ const CenteredH3 = styled(H3)`
   text-align: center;
 `
 
+/**
+ * For both registering and logging in.
+ */
 export class Register extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
@@ -74,6 +77,7 @@ export class Register extends React.Component { // eslint-disable-line react/pre
                   floatingLabelText="Password"
                   value={this.props.password}
                   onChange={this.props.onChangePassword}
+                  type="password"
                 />
 
                 <RaisedButton

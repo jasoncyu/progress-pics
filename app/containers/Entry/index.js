@@ -14,7 +14,7 @@ import messages from './messages';
 import { createEntryAction } from './actions'
 import { Grid, Row, Col } from 'react-flexbox-grid/lib/index'
 import Dropzone from 'react-dropzone'
-import { UserIsAuthenticated } from '../../authWrappers'
+import { UserIsAuthenticated } from 'authWrappers'
 
 import styled from 'styled-components'
 
@@ -30,6 +30,7 @@ const MyDropzone = styled(Dropzone)`
   width: 100%;
   height: 100%;
   text-align: center;
+  cursor: pointer;
   border: 0.4rem dashed grey;
 `
 

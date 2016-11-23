@@ -12,8 +12,8 @@ import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { Link } from 'react-router'
-
 import { List, ListItem } from 'material-ui/List';
+import { UserIsAuthenticated } from 'authWrappers'
 
 import {
   fetchEntriesAction,
@@ -23,6 +23,7 @@ import {
   selectEntries,
 } from '../Entry/selectors'
 
+@UserIsAuthenticated
 export class EntryListCont extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     this.props.fetchEntries()

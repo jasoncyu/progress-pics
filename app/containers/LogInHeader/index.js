@@ -64,6 +64,7 @@ export class LogInHeader extends React.PureComponent { // eslint-disable-line re
         <AppBar
           title={titleElem}
           iconElementRight={iconElementRight}
+          iconElementLeft={<div></div>}
         />
       </div>
     );
